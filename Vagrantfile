@@ -1,6 +1,8 @@
 Vagrant.configure("2") do |config|
     config.vm.box = "ubuntu/bionic64" # or any other Ubuntu version you prefer
     config.vm.network "private_network", type: "dhcp"
+
+    config.vm.synced_folder "./shared", "/home/vagrant/shared"
   
     config.vm.provision "shell", path: "setup.sh"
     config.vm.provision "shell", path: "autologin.sh"

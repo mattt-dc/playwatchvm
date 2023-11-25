@@ -37,7 +37,7 @@ pyautogui.click()
 
 time.sleep(5)
 
-output_file = '/home/vagrant/Videos/' + random_world_name + '.mp4'
+output_file = '/home/vagrant/shared/Videos/' + random_world_name + '.mp4'
 command = f"ffmpeg -y -f x11grab -video_size 957x713 -i :0.0+67,55 -codec:v libx264 {output_file}"
 process = subprocess.Popen(command.split(), stdout=subprocess.PIPE, stderr=subprocess.PIPE)
 time.sleep(3)
