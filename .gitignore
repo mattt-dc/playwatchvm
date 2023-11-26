@@ -1,3 +1,4 @@
 .vagrant/
 *.log
 shared/Videos/*.mp4
+shared/ActionLogs/*.txt
