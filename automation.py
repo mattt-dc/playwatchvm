@@ -72,9 +72,9 @@ def record_first_screen(filename, length):
     stop_recording(process)
 
 actions = {
-    'w (forward)': lambda: press_and_hold('w', 0.2),
-    'a (left)': lambda: press_and_hold('a', 0.2),
-    'd (right)': lambda: press_and_hold('d', 0.2),
+    'w[hold for 0.2 seconds] (forward)': lambda: press_and_hold('w', 0.2),
+    'a[hold for 0.2 seconds] (left)': lambda: press_and_hold('a', 0.2),
+    'd[hold for 0.2 seconds] (right)': lambda: press_and_hold('d', 0.2),
     'left_click (action)': lambda: pyautogui.click(),
     'rotate_camera_left (look left)': rotate_camera_left,
     'rotate_camera_right (look right)': rotate_camera_right,
@@ -82,12 +82,16 @@ actions = {
 
 record_first_screen(random_world_name, 3)
 
-recording_process = start_recording(random_world_name + "-1")
-performed_actions = []
+def RecordRandomActions(random_world_name, number):
+    recording_process = start_recording(random_world_name + "-" + str(number))
+    performed_actions = []
+    for i in range(10):
+        action_key = random.choice(list(actions.keys()))
+        actions[action_key]()
+        performed_actions.append(action_key)
+        time.sleep(1)
+    stop_recording(recording_process)
+    WriteActionsToTextFile(random_world_name, performed_actions)
+
 for i in range(10):
-    action_key = random.choice(list(actions.keys()))
-    actions[action_key]()
-    performed_actions.append(action_key)
-    time.sleep(1)
-stop_recording(recording_process)
-WriteActionsToTextFile(random_world_name, performed_actions)
+    RecordRandomActions(random_world_name, i)
