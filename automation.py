@@ -37,8 +37,8 @@ pyautogui.click()
 
 time.sleep(5)
 
-def WriteActionsToTextFile(random_world_name, performed_actions):
-    filename = "/home/vagrant/shared/ActionLogs/" + random_world_name + "-1"
+def WriteActionsToTextFile(random_world_name, performed_actions, number):
+    filename = "/home/vagrant/shared/ActionLogs/" + random_world_name + "-" + str(number)
     with open(filename + '.txt', 'w') as file:
         for action in performed_actions:
             file.write(action + '\n')
@@ -91,7 +91,7 @@ def RecordRandomActions(random_world_name, number):
         performed_actions.append(action_key)
         time.sleep(1)
     stop_recording(recording_process)
-    WriteActionsToTextFile(random_world_name, performed_actions)
+    WriteActionsToTextFile(random_world_name, performed_actions, number)
 
 for i in range(10):
     RecordRandomActions(random_world_name, i)
